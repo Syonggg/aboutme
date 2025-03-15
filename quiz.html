@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #121212;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        .question {
+            font-size: 22px;
+            margin: 20px 0;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            margin: 10px;
+            padding: 12px 25px;
+            font-size: 18px;
+            background: #ff4500;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            width: 80%;
+        }
+
+        button:hover {
+            background: #ff6347;
+        }
+
+        .response {
+            display: none;
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Your Knowledge About Me</h1>
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. What is my IGN I use all the time?</p>
+                <input type="text" id="ignInput" placeholder="Type your answer...">
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. How tall am I?</p>
+                <div class="options">
+                    <button type="button" onclick="checkAnswer(2, 'wrong', 'Too bad, at least you didn’t say 4’11!')">5'7</button>
+                    <button type="button" onclick="checkAnswer(2, 'correct', 'Impressive! You know me so well huh?')">5'11</button>
+                    <button type="button" onclick="checkAnswer(2, 'wrong', 'WTF??! Get away!')">4'11</button>
+                </div>
+                <p class="response" id="response2"></p>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. What was my first beloved game?</p>
+                <div class="options">
+                    <button type="button" onclick="checkAnswer(3, 'wrong', 'Got too bored very quickly huhuhu')">Call of Duty</button>
+                    <button type="button" onclick="checkAnswer(3, 'wrong', 'U are not an OG!')">Mobile Legends</button>
+                    <button type="button" onclick="checkAnswer(3, 'correct', 'My very first beloved game that taught me everything!')">Growtopia</button>
+                </div>
+                <p class="response" id="response3"></p>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <p>4. What is my favorite outdoor sport?</p>
+                <div class="options">
+                    <button type="button" onclick="checkAnswer(4, 'wrong', 'Too bad I broke my left hand bone')">Basketball</button>
+                    <button type="button" onclick="checkAnswer(4, 'correct', 'Ofc I’m a brainy one, joke🤢🤢 :(( ')">Chess</button>
+                    <button type="button" onclick="checkAnswer(4, 'wrong', 'Used to love these lol')">Badminton</button>
+                </div>
+                <p class="response" id="response4"></p>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <p>5. What is my favorite subject?</p>
+                <div class="options">
+                    <button type="button" onclick="checkAnswer(5, 'wrong', 'Used to think that this is my favorite one lol')">Math</button>
+                    <button type="button" onclick="checkAnswer(5, 'wrong', 'Too bad, it’s not even close to my favorite subject')">English</button>
+                    <button type="button" onclick="checkAnswer(5, 'correct', 'HAHAHAHAHHAHA OF COURSE IT’S LUNCH TIME!')">Lunch</button>
+                </div>
+                <p class="response" id="response5"></p>
+            </div>
+
+            <button type="button" onclick="submitQuiz()">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        let score = 0;
+
+        function checkAnswer(questionNumber, status, responseText) {
+            let responseElement = document.getElementById("response" + questionNumber);
+            responseElement.innerText = responseText;
+            responseElement.style.display = "block";
+
+            if (status === 'correct') {
+                score++;
+            }
+        }
+
+        function submitQuiz() {
+            let ignAnswer = document.getElementById("ignInput").value.toLowerCase();
+            if (ignAnswer.includes("syong")) {
+                score++;
+            }
+
+            window.location.href = "quiz_results.html?score=" + score;
+        }
+    </script>
+</body>
+</html>
+
